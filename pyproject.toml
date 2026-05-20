@@ -1,2 +1,13 @@
+[project]
+name = "myapp"
+version = "0.1.0"
+description = "Flask app"
+requires-python = ">=3.11"
+
+dependencies = [
+    "flask",
+    "gunicorn"
+]
+
 [tool.vercel]
 entrypoint = "run:app"
