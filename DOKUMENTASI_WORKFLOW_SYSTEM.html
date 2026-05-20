@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic State Transition Diagram - IT Asset Lifecycle</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-page: #fdfdfd;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --border-color: #333333;
+            --accent-color: #000000;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 50px 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: left;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 0;
+        }
+
+        .meta-info {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 10px;
+        }
+
+        section {
+            margin-bottom: 80px;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .diagram-box {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 40px 10px;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border-radius: 4px;
+        }
+
+        .explanation {
+            margin-top: 25px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .explanation ul {
+            padding-left: 20px;
+        }
+
+        .explanation li {
+            margin-bottom: 8px;
+        }
+
+        footer {
+            margin-top: 100px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #999;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        /* Mermaid Overrides for Academic Look */
+        .mermaid {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>State Transition Diagram (STD)</h1>
+        <div class="meta-info">
+            Project: IT Asset Lifecycle Platform (NOVA) <br>
+            Subject: Human-Computer Interaction (HCI) Analysis
+        </div>
+    </header>
+
+    <!-- SECTION 1: ASSET LIFECYCLE -->
+    <section>
+        <h2>1. Asset Lifecycle States</h2>
+        <div class="diagram-box">
+            <div class="mermaid">
+                graph LR
+                    START(( )) --> S1
+                    S1((AVAILABLE)) -- "Assign Asset" --> S2((ASSIGNED))
+                    S2((ASSIGNED)) -- "Return Asset" --> S1
+                    
+                    S1 -- "Send to Service" --> S3((ON SERVICE))
+                    S3 -- "Service Completed" --> S1
+                    
+                    S1 -- "Initiate Transfer" --> S4((IN TRANSFER))
+                    S4 -- "Mark as Arrived" --> S1
+                    
+                    S1 -- "Retire / Disposal" --> S5(((RETIRED)))
+
+                    style START fill:#000,stroke:#000
+                    style S1 fill:#fff,stroke:#000,stroke-width:2px
+                    style S2 fill:#fff,stroke:#000,stroke-width:2px
+                    style S3 fill:#fff,stroke:#000,stroke-width:2px
+                    style S4 fill:#fff,stroke:#000,stroke-width:2px
+                    style S5 fill:#fff,stroke:#000,stroke-width:3px
+            </div>
+        </div>
+        <div class="explanation">
+            <strong>Analisis Workflow Operasional:</strong>
+            <ul>
+                <li><strong>AVAILABLE:</strong> State awal aset setelah registrasi, siap untuk digunakan.</li>
+                <li><strong>ASSIGNED:</strong> State aktif saat aset berada di bawah tanggung jawab karyawan (Employee Ownership).</li>
+                <li><strong>ON SERVICE:</strong> State transisi saat aset mengalami kendala teknis dan dikirim ke vendor.</li>
+                <li><strong>IN TRANSFER:</strong> State pergerakan antar lokasi fisik cabang/toko.</li>
+                <li><strong>RETIRED:</strong> Final state (Accepting State) saat aset dihapus dari daftar aktif.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SECTION 2: EXIT CLEARANCE -->
+    <section>
+        <h2>2. Employee Exit Clearance Workflow</h2>
+        <div class="diagram-box">
+            <div class="mermaid">
+                graph TD
+                    E1((ACTIVE)) -- "Mark as Resigned" --> E2((RESIGNED))
+                    
+                    E2 -- "Return Physical Assets" --> E3((CLEARANCE))
+                    E3 -- "Revoke System Access" --> E3
+                    
+                    E3 -- "Verification Complete" --> E4(((INACTIVE)))
+
+                    style E1 fill:#fff,stroke:#000,stroke-width:2px
+                    style E2 fill:#fff,stroke:#000,stroke-width:2px
+                    style E3 fill:#fff,stroke:#000,stroke-width:2px
+                    style E4 fill:#fff,stroke:#000,stroke-width:3px
+            </div>
+        </div>
+        <div class="explanation">
+            <strong>Analisis Human Computer Interaction:</strong>
+            <ul>
+                <li><strong>State Transition Integrity:</strong> Sistem memastikan tidak ada aset yang tertinggal dengan memaksa transisi melalui state <em>Clearance</em>.</li>
+                <li><strong>Consistency:</strong> Alur pemutusan akses digital (Email/ERP) mengikuti pola yang sama dengan pengembalian aset fisik.</li>
+                <li><strong>HCI Value:</strong> Mengurangi beban memori admin dengan menyediakan <em>checklist</em> dinamis pada setiap transisi state.</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        Documentation for IT Asset Lifecycle System Prototype <br>
+        Generated for Academic Presentation Purposes
+    </footer>
+</div>
+
+<script>
+    mermaid.initialize({ 
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            fontFamily: 'Inter',
+            fontSize: '13px',
+            lineColor: '#000000',
+            textColor: '#000000',
+            mainBkg: '#ffffff',
+            nodeBorder: '#000000',
+            clusterBkg: '#ffffff',
+            titleColor: '#000000',
+            edgeLabelBackground: '#ffffff'
+        }
+    });
+</script>
+</body>
+</html>
